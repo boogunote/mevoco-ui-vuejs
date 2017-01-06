@@ -2,7 +2,7 @@
   <div>
     <input type="text" />
     <input type="password" />
-    <button>Login</button>
+    <button id="login">Login</button>
   </div>
 </template>
 
