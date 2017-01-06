@@ -1,18 +1,14 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <login-page></login-page>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import LoginPage from './pages/LoginPage'
-
 export default {
   name: 'app',
-  components: {
-    LoginPage
-  }
+  components: {}
 }
 </script>
 
