@@ -1,13 +1,23 @@
 <template>
   <div id="app">
+    <select v-model="Vue.config.lang">
+      <option value="zh-CN">中文</option>
+      <option value="en">English</option>
+    </select>
     <img src="./assets/logo.png">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: 'app',
+  data () {
+    return {
+      Vue: Vue
+    }
+  },
   components: {}
 }
 </script>

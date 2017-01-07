@@ -2,7 +2,7 @@
   <div>
     <input type="text" />
     <input type="password" />
-    <button id="login">Login</button>
+    <button id="login">{{ $t("common.login") }}</button>
   </div>
 </template>
 
