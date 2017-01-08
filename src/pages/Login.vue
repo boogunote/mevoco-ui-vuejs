@@ -1,5 +1,9 @@
 <template>
   <div>
+    <select v-model="Vue.config.lang">
+      <option value="zh-CN">中文</option>
+      <option value="en">English</option>
+    </select>
     <input type="text" v-model="accountName" />
     <input type="password" v-model="password" />
     <button id="login" @click="login()">{{ $t("common.login") }}</button>
@@ -7,10 +11,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import 'whatwg-fetch'
 import sha512 from 'crypto-js/sha512'
-// import VueRouter from 'vue-router'
-// const router = new VueRouter()
+import VueRouter from 'vue-router'
+const router = new VueRouter()
 
 /* global fetch:false */
 /* global TextDecoder:false */
@@ -22,6 +27,7 @@ export default {
   name: 'login',
   data () {
     return {
+      Vue: Vue,
       accountName: 'admin',
       password: 'password'
     }
@@ -39,19 +45,8 @@ export default {
             localStorage.setItem('sessionUuid', reply.inventory.uuid)
             debugger
             rpc.connect(() => {
-              rpc.call({
-                'org.zstack.header.vm.APIQueryVmInstanceMsg': {
-                  count: false,
-                  start: 0,
-                  limit: 1000,
-                  replyWithCount: true,
-                  conditions: []
-                }
-              }, (resp) => {
-                console.log(resp)
-              })
+              router.push('main/vm')
             })
-            // router.push('main')
           }
         })
       })

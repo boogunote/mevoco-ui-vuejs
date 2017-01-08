@@ -22,9 +22,9 @@ Object.keys(locales).forEach(function (lang) {
   Vue.locale(lang, locales[lang])
 })
 import App from './App'
-
-const Foo = { template: '<div>foo</div>' }
 import LoginPage from './pages/Login'
+import MainPage from './pages/Main'
+import VmInstancePage from './pages/VmInstance'
 
 const routes = [
   {
@@ -37,7 +37,13 @@ const routes = [
       },
       {
         path: 'main',
-        component: Foo
+        component: MainPage,
+        children: [
+          {
+            path: 'vm',
+            component: VmInstancePage
+          }
+        ]
       }
     ]
   }
