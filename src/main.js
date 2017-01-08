@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueI18n from 'vue-i18n'
+import store from './store'
+import { sync } from 'vuex-router-sync'
 
 import en from 'src/i18n/en'
 import zhCN from 'src/i18n/zh-CN'
@@ -53,7 +55,10 @@ const router = new VueRouter({
   routes
 })
 
+sync(store, router) // done.
+
 /* eslint-disable no-new */
 new Vue({
-  router
+  router,
+  store
 }).$mount('#app')

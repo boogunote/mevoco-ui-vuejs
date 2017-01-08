@@ -14,8 +14,8 @@
 import Vue from 'vue'
 import 'whatwg-fetch'
 import sha512 from 'crypto-js/sha512'
-import VueRouter from 'vue-router'
-const router = new VueRouter()
+// import VueRouter from 'vue-router'
+// const router = new VueRouter()
 
 /* global fetch:false */
 /* global TextDecoder:false */
@@ -24,7 +24,6 @@ const router = new VueRouter()
 import * as rpc from 'src/utils/rpc'
 
 export default {
-  name: 'login',
   data () {
     return {
       Vue: Vue,
@@ -34,7 +33,7 @@ export default {
   },
   methods: {
     login: function () {
-      // const self = this;
+      const self = this
       fetch(`http://localhost:8080/apiCall/login?accountName=${this.accountName}&password=${sha512(this.password).toString()}`)
       .then(function (response) {
         const reader = response.body.getReader()
@@ -45,7 +44,7 @@ export default {
             localStorage.setItem('sessionUuid', reply.inventory.uuid)
             debugger
             rpc.connect(() => {
-              router.push('main/vm')
+              self.$router.push('main/vm')
             })
           }
         })

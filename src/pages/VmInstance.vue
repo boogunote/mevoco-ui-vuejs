@@ -1,6 +1,10 @@
 <template>
   <div>
     <div>VM Instance</div>
+    <button @click="showModal = true">Create</button>
+    <create-vm-instance-dlg v-if="showModal" @close="showModal = false">
+      <h3 slot="header">custom header</h3>
+    </create-vm-instance-dlg>
     <table>
       <thead>
         <tr>
@@ -17,13 +21,18 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import * as rpc from 'src/utils/rpc'
+import CreateVmInstanceDlg from 'src/modals/CreateVmInstance'
+
+Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
 
 export default {
   name: 'vmInstance',
   data () {
     return {
-      itemList: []
+      itemList: [],
+      showModal: false
     }
   },
   created: function () {
