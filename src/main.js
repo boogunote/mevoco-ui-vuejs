@@ -44,6 +44,10 @@ const routes = [
           {
             path: 'vm',
             component: VmInstancePage
+          },
+          {
+            path: 'host',
+            component: VmInstancePage
           }
         ]
       }
