@@ -27,7 +27,8 @@ const Foo = { template: '<div>foo</div>' }
 import LoginPage from './pages/Login'
 
 const routes = [
-  { path: '/',
+  {
+    path: '/',
     component: App,
     children: [
       {
@@ -43,7 +44,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes // （缩写）相当于 routes: routes
+  routes
 })
 
 /* eslint-disable no-new */

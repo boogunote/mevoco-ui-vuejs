@@ -47,6 +47,8 @@ export default {
                   replyWithCount: true,
                   conditions: []
                 }
+              }, (resp) => {
+                console.log(resp)
               })
             })
             // router.push('main')
