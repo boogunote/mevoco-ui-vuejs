@@ -11,8 +11,6 @@
           </div>
 
           <div class="modal-body">
-            <button @click="showModal = true">Instance Offering</button>
-            <instance-offering-list-dlg v-if="showModal" @close="showModal = false">
             <slot name="body">
               default body
             </slot>
@@ -33,11 +31,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import InstanceOfferingListDlg from 'src/modals/InstanceOfferingList'
-
-Vue.component('instance-offering-list-dlg', InstanceOfferingListDlg)
-
 export default {
   data () {
     return {
