@@ -4,7 +4,7 @@
       <option value="zh-CN">中文</option>
       <option value="en">English</option>
     </select>
-    <img src="./assets/logo.png">
+    <!-- <img src="./assets/logo.png"> -->
     <router-view></router-view>
   </div>
 </template>

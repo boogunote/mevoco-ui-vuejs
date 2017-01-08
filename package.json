@@ -13,9 +13,13 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "sockjs-client": "^1.1.1",
+    "stompjs": "^2.3.3",
     "vue": "^2.1.0",
     "vue-i18n": "^4.10.0",
-    "vue-router": "^2.1.1"
+    "vue-router": "^2.1.1",
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
