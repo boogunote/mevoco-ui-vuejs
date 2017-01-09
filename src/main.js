@@ -27,6 +27,7 @@ import App from './App'
 import LoginPage from './pages/Login'
 import MainPage from './pages/Main'
 import VmInstancePage from './pages/VmInstance'
+import HostPage from './pages/Host'
 
 const routes = [
   {
@@ -47,7 +48,7 @@ const routes = [
           },
           {
             path: 'host',
-            component: VmInstancePage
+            component: HostPage
           }
         ]
       }
