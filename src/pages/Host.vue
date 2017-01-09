@@ -22,7 +22,7 @@
 
 <script>
 import Vue from 'vue'
-import * as rpc from 'src/utils/rpc'
+import rpc from 'src/utils/rpc'
 import CreateVmInstanceDlg from 'src/modals/CreateVmInstance'
 
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)

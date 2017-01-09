@@ -1,0 +1,2 @@
+export const UPDATE_VM = 'UPDATE_VM'
+export const UPDATE_VM_PAGE_LIST = 'UPDATE_VM_PAGE_LIST'

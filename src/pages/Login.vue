@@ -21,7 +21,7 @@ import sha512 from 'crypto-js/sha512'
 /* global TextDecoder:false */
 /* global localStorage:false */
 
-import * as rpc from 'src/utils/rpc'
+import rpc from 'src/utils/rpc'
 
 export default {
   data () {
@@ -42,7 +42,6 @@ export default {
           const reply = JSON.parse(output)
           if (reply) {
             localStorage.setItem('sessionUuid', reply.inventory.uuid)
-            debugger
             rpc.connect(() => {
               self.$router.push('main/vm')
             })

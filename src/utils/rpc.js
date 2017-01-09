@@ -20,12 +20,13 @@ function getFirstItem (obj) {
   return obj[Object.keys(obj)[0]]
 }
 
-export function connect (cb) {
+function connect (cb) {
   if (client) return
 
   const sessionUuid = localStorage.getItem('sessionUuid')
   var socket = new SockJS('http://localhost:8080/stomp')
   client = Stomp.over(socket)
+  client.debug = null
 
   client.connect({}, () => {
     client.subscribe(`/topic/hello/${sessionUuid}`, (reply) => {
@@ -38,12 +39,24 @@ export function connect (cb) {
   })
 }
 
-export function call (msg, cb) {
-  const apiId = genUniqueId()
-  getFirstItem(msg).session = {
-    uuid: localStorage.getItem('sessionUuid'),
-    apiId: apiId
+function call (msg, cb) {
+  function _ () {
+    const apiId = genUniqueId()
+    getFirstItem(msg).session = {
+      uuid: localStorage.getItem('sessionUuid'),
+      apiId: apiId
+    }
+    cbList[apiId] = cb
+    client.send('/app/hello', {}, JSON.stringify(msg))
   }
-  cbList[apiId] = cb
-  client.send('/app/hello', {}, JSON.stringify(msg))
+  if (!client) {
+    connect(_)
+  } else {
+    _()
+  }
+}
+
+export default {
+  connect,
+  call
 }

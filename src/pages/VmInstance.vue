@@ -12,8 +12,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in itemList">
-          <td>{{ item.name }}</td>
+        <tr v-for="uuid in $store.state.pages.vm.uuidList">
+          <td>{{ $store.state.db.vm[uuid].name }}</td>
         </tr>
       </tbody>
     </table>
@@ -22,7 +22,9 @@
 
 <script>
 import Vue from 'vue'
-import * as rpc from 'src/utils/rpc'
+import { mapActions } from 'vuex'
+
+import rpc from 'src/utils/rpc'
 import CreateVmInstanceDlg from 'src/modals/CreateVmInstance'
 
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
@@ -50,10 +52,12 @@ export default {
           conditions: []
         }
       }, (resp) => {
-        console.log(resp)
-        self.itemList = resp.inventories
+        self.updateVmPageList(resp.inventories)
       })
-    }
+    },
+    ...mapActions([
+      'updateVmPageList'
+    ])
   }
 }
 </script>

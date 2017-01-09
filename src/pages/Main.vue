@@ -2,8 +2,8 @@
   <div>
     <div class="nav">
       <ul>
-        <li><router-link to="/main/vm" :style="{color: $route.path != '/main/vm'? 'red':'yellow'}">VM</router-link></li>
-        <li><router-link to="/main/host" :style="{color: $route.path != '/main/host'? 'red':'yellow'}">host</router-link></li>
+        <li><router-link to="/main/vm" :style="{color: $store.state.route.path != '/main/vm'? 'red':'yellow'}">VM</router-link></li>
+        <li><router-link to="/main/host" :style="{color: $store.state.route.path != '/main/host'? 'red':'yellow'}">host</router-link></li>
       </ul>
     </div>
     <div class="section">
