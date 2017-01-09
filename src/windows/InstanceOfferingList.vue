@@ -9,8 +9,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="uuid in $store.state.windows[windowId].uuidList">
-            <td>{{ $store.state.db.instanceOffering[uuid].name }}</td>
+          <tr v-for="uuid in windowData.uuidList">
+            <td>{{ instanceOffering[uuid].name }}</td>
           </tr>
         </tbody>
       </table>
@@ -59,12 +59,7 @@ export default {
         resp.inventories.forEach((item) => {
           uuidList.push(item.uuid)
         })
-        // self.$store.commit('UPDATE_INSTANCE_OFFERING', resp.inventories)
         self.updateInstanceOffering(resp.inventories)
-        // self.$store.commit('UPDATE_WINDOW', {
-        //   windowId: self.windowId,
-        //   uuidList: self.uuidList
-        // })
         self.updateWindow({
           id: this.windowId,
           uuidList
@@ -78,8 +73,11 @@ export default {
     ])
   },
   computed: {
-    windows: function () {
-      return this.$store.state.windows
+    windowData: function () {
+      return this.$store.state.windows[this.windowId]
+    },
+    instanceOffering: function () {
+      return this.$store.state.db.instanceOffering
     }
   }
 }
