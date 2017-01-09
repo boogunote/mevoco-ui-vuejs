@@ -43,6 +43,9 @@ export default {
 
     this.queryList()
   },
+  destroyed: function () {
+    this.destroyWindow(this.windowId)
+  },
   methods: {
     queryList: function () {
       const self = this
@@ -63,13 +66,14 @@ export default {
         self.updateWindow({
           id: this.windowId,
           uuidList
-        }, 'aaaa')
+        })
       })
     },
     ...mapActions([
       'createWindow',
-      'updateInstanceOffering',
-      'updateWindow'
+      'updateWindow',
+      'destroyWindow',
+      'updateInstanceOffering'
     ])
   },
   computed: {

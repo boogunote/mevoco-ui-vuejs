@@ -17,6 +17,9 @@ const actions = {
   },
   updateWindow ({ commit, state }, param, test) {
     commit(types.UPDATE_WINDOW, param)
+  },
+  destroyWindow ({ commit, state }, id) {
+    commit(types.DESTROY_WINDOW, id)
   }
 }
 
@@ -24,8 +27,7 @@ const actions = {
 const mutations = {
   [types.CREATE_WINDOW] (state, id) {
     Vue.set(state, id, {
-      id: id,
-      uuidList: []
+      id: id
     })
   },
   [types.UPDATE_WINDOW] (state, newState) {
@@ -33,6 +35,10 @@ const mutations = {
       ...state[newState.id],
       ...newState
     })
+  },
+  [types.DESTROY_WINDOW] (state, id) {
+    // Vue.set(state, id, undefined)
+    delete state[id]
   }
 }
 

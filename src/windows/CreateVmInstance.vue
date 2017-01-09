@@ -2,14 +2,14 @@
   <dialog-template>
     <div slot="header">Create Instance</div>
     <div slot="body">
-      <input v-model="name" />
+      <!-- <input v-model="name" /> -->
       <br />
-      <span>{{ instanceOfferingUuid }}</span><button @click="showModal = true">Instance Offering</button>
-      <instance-offering-list-dlg v-if="showModal" @close="showModal = false" />
+      <span>{{ windowData.instanceOfferingUuid }}</span><button @click="updateWindow({ 'showInstanceOfferingDlg': true })">Instance Offering</button>
+      <instance-offering-list-dlg v-if="windowData.showInstanceOfferingDlg" @close="updateWindow({ 'showInstanceOfferingDlg': false })" />
       <br />
-      <span>{{ imageUuid }}</span><button @click="showModal = true">Image</button>
+      <span>{{ windowData.imageUuid }}</span><button @click="updateWindow({ 'showImageDlg': true })">Image</button>
       <br />
-      <span>{{ networkUuid }}</span><button @click="showModal = true">Network</button>
+      <span>{{ windowData.networkOfferingUuid }}</span><button @click="updateWindow({ 'showNetowrkDlg': true })">Network</button>
     </div>
     <div slot="footer">
       <button class="modal-default-button" @click="$emit('close')">
@@ -21,6 +21,8 @@
 
 <script>
 import Vue from 'vue'
+import { mapActions } from 'vuex'
+import { genUniqueId } from 'src/utils/utils'
 import InstanceOfferingListDlg from 'src/windows/InstanceOfferingList'
 import DialogTemplate from 'src/windows/DialogTemplate'
 
@@ -30,18 +32,43 @@ Vue.component('instance-offering-list-dlg', InstanceOfferingListDlg)
 export default {
   data () {
     return {
-      showModal: false,
-      name: '',
-      instanceOfferingUuid: '',
-      imageUuid: '',
-      networkUuid: ''
+      windowId: ''
     }
   },
   created: function () {
-    this.queryList()
+    this.createWindow()
+  },
+  destroyed: function () {
+    this.destroyWindow(this.windowId)
   },
   methods: {
-    queryList: function () {
+    createWindow: function () {
+      this.windowId = `CreateVmInstance-${genUniqueId()}`
+      this._createWindow(this.windowId)
+      this.updateWindow({
+        name: '',
+        instanceOfferingUuid: '',
+        imageUuid: '',
+        networkUuid: '',
+        showInstanceOfferingDlg: false,
+        showImageDlg: false,
+        showNetworkDlg: false
+      })
+    },
+    updateWindow: function (newState) {
+      this._updateWindow({ id: this.windowId, ...newState })
+    },
+    ...mapActions({
+      _createWindow: 'createWindow',
+      _updateWindow: 'updateWindow'
+    }),
+    ...mapActions([
+      'destroyWindow'
+    ])
+  },
+  computed: {
+    windowData: function () {
+      return this.$store.state.windows[this.windowId]
     }
   }
 }
