@@ -62,6 +62,11 @@ const router = new VueRouter({
 
 sync(store, router) // done.
 
+store.subscribe((mutation, state) => {
+  console.log(mutation.type)
+  console.log(mutation.payload)
+})
+
 /* eslint-disable no-new */
 new Vue({
   router,

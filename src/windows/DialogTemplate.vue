@@ -32,18 +32,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      showModal: false
-    }
-  },
-  created: function () {
-    this.queryList()
-  },
-  methods: {
-    queryList: function () {
-    }
-  }
 }
 </script>
 

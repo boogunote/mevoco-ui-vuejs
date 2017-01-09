@@ -1,20 +1,12 @@
 import SockJS from 'sockjs-client'
 import 'stompjs/lib/stomp.js'
+import { genUniqueId } from './utils'
 
 /* global localStorage:false */
 /* global Stomp:false */
 
 let client = null
 let cbList = {}
-
-function genUniqueId () {
-  function randomString (length, chars) {
-    var result = ''
-    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))]
-    return result
-  }
-  return randomString(8, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-}
 
 function getFirstItem (obj) {
   return obj[Object.keys(obj)[0]]

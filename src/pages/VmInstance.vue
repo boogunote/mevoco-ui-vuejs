@@ -25,7 +25,7 @@ import Vue from 'vue'
 import { mapActions } from 'vuex'
 
 import rpc from 'src/utils/rpc'
-import CreateVmInstanceDlg from 'src/modals/CreateVmInstance'
+import CreateVmInstanceDlg from 'src/windows/CreateVmInstance'
 
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
 
