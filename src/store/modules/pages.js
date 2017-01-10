@@ -20,6 +20,9 @@ const actions = {
       uuidList.push(item.uuid)
     })
     commit(types.UPDATE_VM_PAGE_LIST, uuidList)
+  },
+  updatePage ({ commit, state }, param) {
+    commit(types.UPDATE_PAGE, param)
   }
 }
 
@@ -27,6 +30,9 @@ const actions = {
 const mutations = {
   [types.UPDATE_VM_PAGE_LIST] (state, uuidList) {
     Vue.set(state.vm, 'uuidList', uuidList)
+  },
+  [types.UPDATE_PAGE] (state, { page, newState }) {
+    Vue.set(state, page, { ...state[page], ...newState })
   }
 }
 

@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>VM Instance</div>
-    <button @click="showModal = true">Create</button>
-    <create-vm-instance-dlg v-if="showModal" @close="showModal = false">
+    <button @click="updatePage({ showDlgCreateVmInstance: true })">Create</button>
+    <create-vm-instance-dlg v-if="pageData.showDlgCreateVmInstance" @close="updatePage({ showDlgCreateVmInstance: false })">
       <h3 slot="header">custom header</h3>
     </create-vm-instance-dlg>
     <table>
@@ -12,8 +12,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="uuid in $store.state.pages.vm.uuidList">
-          <td>{{ $store.state.db.vm[uuid].name }}</td>
+        <tr v-for="uuid in pageData.uuidList">
+          <td>{{ dbData.vm[uuid].name }}</td>
         </tr>
       </tbody>
     </table>
@@ -52,12 +52,30 @@ export default {
           conditions: []
         }
       }, (resp) => {
-        self.updateVmPageList(resp.inventories)
+        self.updatePage({ uuidList: resp.inventories.map((item) => item.uuid) })
+        self.updateDbTable({
+          tableName: 'vm',
+          list: resp.inventories
+        })
       })
     },
+    updatePage: function (newState) {
+      this._updatePage({ page: 'vm', newState })
+    },
     ...mapActions([
-      'updateVmPageList'
-    ])
+      'updateDbTable'
+    ]),
+    ...mapActions({
+      _updatePage: 'updatePage'
+    })
+  },
+  computed: {
+    pageData: function () {
+      return this.$store.state.pages.vm
+    },
+    dbData: function () {
+      return this.$store.state.db
+    }
   }
 }
 </script>

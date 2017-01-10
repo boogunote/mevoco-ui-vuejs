@@ -2,7 +2,7 @@
   <dialog-template>
     <div slot="header">Create Instance</div>
     <div slot="body">
-      <!-- <input v-model="name" /> -->
+      <input :value="windowData.name" @input="(e) => { updateWindow({ 'name': e.target.value }) }">
       <br />
       <span>{{ windowData.instanceOfferingUuid }}</span><button @click="updateWindow({ 'showInstanceOfferingDlg': true })">Instance Offering</button>
       <instance-offering-list-dlg v-if="windowData.showInstanceOfferingDlg" @close="updateWindow({ 'showInstanceOfferingDlg': false })" />
@@ -21,7 +21,7 @@
 
 <script>
 import Vue from 'vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { genUniqueId } from 'src/utils/utils'
 import InstanceOfferingListDlg from 'src/windows/InstanceOfferingList'
 import DialogTemplate from 'src/windows/DialogTemplate'
@@ -69,7 +69,10 @@ export default {
   computed: {
     windowData: function () {
       return this.$store.state.windows[this.windowId]
-    }
+    },
+    ...mapState({
+      windows: state => state.windows
+    })
   }
 }
 </script>
