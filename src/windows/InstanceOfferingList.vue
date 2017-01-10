@@ -26,25 +26,20 @@
 <script>
 import Vue from 'vue'
 import { mapActions } from 'vuex'
-import { genUniqueId } from 'src/utils/utils'
 import rpc from 'src/utils/rpc'
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
+import WindowBase from 'src/windows/WindowBase'
 
 export default {
+  mixins: [WindowBase],
   data () {
     return {
-      windowId: ''
+      className: 'InstanceOfferingList'
     }
   },
   created: function () {
-    this.windowId = `InstanceOffering-${genUniqueId()}`
-    this.createWindow(this.windowId)
-
     this.queryList()
-  },
-  destroyed: function () {
-    this.destroyWindow(this.windowId)
   },
   methods: {
     queryList: function () {
@@ -70,16 +65,10 @@ export default {
       })
     },
     ...mapActions([
-      'createWindow',
-      'updateWindow',
-      'destroyWindow',
       'updateInstanceOffering'
     ])
   },
   computed: {
-    windowData: function () {
-      return this.$store.state.windows[this.windowId]
-    },
     instanceOffering: function () {
       return this.$store.state.db.instanceOffering
     }

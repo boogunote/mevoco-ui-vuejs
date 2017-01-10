@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100%;">
     <div>VM Instance</div>
     <button @click="updatePage({ showDlgCreateVmInstance: true })">Create</button>
     <create-vm-instance-dlg v-if="pageData.showDlgCreateVmInstance" @close="updatePage({ showDlgCreateVmInstance: false })">
@@ -17,6 +17,8 @@
         </tr>
       </tbody>
     </table>
+    <div class="sidepage">
+    </div>
   </div>
 </template>
 
@@ -81,4 +83,16 @@ export default {
 </script>
 
 <style scoped>
+.sidepage {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    background-color: #fff;
+    overflow: hidden;
+    z-index: 10;
+    padding-top: 150px;
+    box-shadow: -5px 0 0 rgba(0,0,0,.07);
+}
 </style>
