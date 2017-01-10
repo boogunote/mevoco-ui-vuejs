@@ -5,7 +5,12 @@ import * as types from '../mutation-types'
 // shape: [{ id, quantity }]
 const state = {
   vm: {},
-  instanceOffering: {}
+  instanceOffering: {},
+  image: {},
+  l3network: {},
+  l2network: {},
+  volume: {},
+  host: {}
 }
 
 // getters

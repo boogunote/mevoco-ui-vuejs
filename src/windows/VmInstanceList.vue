@@ -31,6 +31,20 @@ export default {
           list: resp.inventories
         })
       })
+    },
+    create: function (param) {
+      const self = this
+      rpc.call({
+        'org.zstack.header.vm.APICreateVmInstanceMsg': param
+      }, (resp) => {
+        let uuidList = this.windowData.uuidList.slice()
+        uuidList.unshift(resp.inventory.uuid)
+        self.updateWindow({ uuidList })
+        self.updateDbTable({
+          tableName: 'vm',
+          list: [resp.inventory]
+        })
+      })
     }
   }
 }

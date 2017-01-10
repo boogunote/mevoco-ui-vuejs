@@ -18,12 +18,17 @@ function connect (cb) {
   const sessionUuid = localStorage.getItem('sessionUuid')
   var socket = new SockJS('http://localhost:8080/stomp')
   client = Stomp.over(socket)
-  client.debug = null
+  // client.debug = null
 
   client.connect({}, () => {
     client.subscribe(`/topic/hello/${sessionUuid}`, (reply) => {
       let resp = getFirstItem(JSON.parse(reply.body))
-      const apiId = resp.headers.correlationId.split('-')[1]
+      let apiId = ''
+      if (resp.headers.correlationId) {
+        apiId = resp.headers.correlationId.split('-')[1]
+      } else {
+        apiId = resp.apiId.split('-')[1]
+      }
       cbList[apiId](resp)
       delete cbList[apiId]
     })

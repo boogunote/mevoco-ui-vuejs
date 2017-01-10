@@ -4,15 +4,36 @@
     <div slot="body">
       <input :value="windowData.name" @input="(e) => { updateWindow({ 'name': e.target.value }) }">
       <br />
-      <span>{{ windowData.instanceOfferingUuid }}</span><button @click="updateWindow({ 'showInstanceOfferingDlg': true })">Instance Offering</button>
-      <instance-offering-list-dlg v-if="windowData.showInstanceOfferingDlg" @close="updateWindow({ 'showInstanceOfferingDlg': false })" />
+      <span>
+        {{ dbData.instanceOffering[windowData.instanceOfferingUuid] && dbData.instanceOffering[windowData.instanceOfferingUuid].name }}
+      </span>
+      <button @click="updateWindow({ 'showInstanceOfferingDlg': true })">Instance Offering</button>
+      <instance-offering-list-dlg
+        v-if="windowData.showInstanceOfferingDlg"
+        @close="(uuid) => updateWindow({ 'showInstanceOfferingDlg': false, 'instanceOfferingUuid': uuid })"
+      />
       <br />
-      <span>{{ windowData.imageUuid }}</span><button @click="updateWindow({ 'showImageDlg': true })">Image</button>
+      <span>
+        {{ dbData.image[windowData.imageUuid] && dbData.image[windowData.imageUuid].name }}
+      </span>
+      <button @click="updateWindow({ 'showImageDlg': true })">Image</button>
+      <image-list-dlg
+        v-if="windowData.showImageDlg"
+        @close="(uuid) => updateWindow({ 'showImageDlg': false, 'imageUuid': uuid })"
+      />
       <br />
-      <span>{{ windowData.networkOfferingUuid }}</span><button @click="updateWindow({ 'showNetowrkDlg': true })">Network</button>
+      <span>
+        {{ dbData.l3network[windowData.networkUuid] && dbData.l3network[windowData.networkUuid].name }}
+      </span>
+      <button @click="updateWindow({ 'showNetowrkDlg': true })">Network</button>
+      <l3network-list-dlg
+        v-if="windowData.showNetowrkDlg"
+        @close="(uuid) => updateWindow({ 'showNetowrkDlg': false, 'networkUuid': uuid })"
+      />
+      <br />
     </div>
     <div slot="footer">
-      <button class="modal-default-button" @click="$emit('close')">
+      <button class="modal-default-button" @click="$emit('close', createParam())">
         OK
       </button>
     </div>
@@ -21,12 +42,15 @@
 
 <script>
 import Vue from 'vue'
-import InstanceOfferingListDlg from 'src/windows/InstanceOfferingList'
-import DialogTemplate from 'src/windows/DialogTemplate'
-import WindowBase from 'src/windows/WindowBase'
-
-Vue.component('dialog-template', DialogTemplate)
+import InstanceOfferingListDlg from 'src/windows/InstanceOfferingListDlg'
 Vue.component('instance-offering-list-dlg', InstanceOfferingListDlg)
+import ImageListDlg from 'src/windows/ImageListDlg'
+Vue.component('image-list-dlg', ImageListDlg)
+import L3NetworkListDlg from 'src/windows/L3NetworkListDlg'
+Vue.component('l3network-list-dlg', L3NetworkListDlg)
+import DialogTemplate from 'src/windows/DialogTemplate'
+Vue.component('dialog-template', DialogTemplate)
+import WindowBase from 'src/windows/WindowBase'
 
 export default {
   mixins: [WindowBase],
@@ -45,6 +69,17 @@ export default {
       showImageDlg: false,
       showNetworkDlg: false
     })
+  },
+  methods: {
+    createParam: function () {
+      return {
+        name: this.windowData.name,
+        instanceOfferingUuid: this.windowData.instanceOfferingUuid,
+        imageUuid: this.windowData.imageUuid,
+        l3NetworkUuids: [this.windowData.networkUuid],
+        defaultL3NetworkUuid: this.windowData.networkUuid
+      }
+    }
   }
 }
 </script>

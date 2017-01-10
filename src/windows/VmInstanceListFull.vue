@@ -2,7 +2,9 @@
   <div style="height: 100%;">
     <div>VM Instance</div>
     <button @click="updateWindow({ showDlgCreateVmInstance: true })">Create</button>
-    <create-vm-instance-dlg v-if="windowData.showDlgCreateVmInstance" @close="updateWindow({ showDlgCreateVmInstance: false })" />
+    <create-vm-instance-dlg
+      v-if="windowData.showDlgCreateVmInstance"
+      @close="(param) => { create(param); updateWindow({ showDlgCreateVmInstance: false }) }" />
     <table>
       <thead>
         <tr>

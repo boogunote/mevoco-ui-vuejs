@@ -11,7 +11,7 @@ export default {
     queryList: function () {
       const self = this
       rpc.call({
-        'org.zstack.header.configuration.APIQueryInstanceOfferingMsg': {
+        'org.zstack.header.image.APIQueryImageMsg': {
           count: false,
           start: 0,
           limit: 1000,
@@ -21,7 +21,7 @@ export default {
       }, (resp) => {
         self.updateWindow({ uuidList: resp.inventories.map((item) => item.uuid) })
         self.updateDbTable({
-          tableName: 'instanceOffering',
+          tableName: 'image',
           list: resp.inventories
         })
       })
