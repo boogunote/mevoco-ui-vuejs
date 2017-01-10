@@ -1,19 +1,10 @@
-<template>
-  <div>
-    <div class="header">
-    </div>
-    <div class="body">
-    </div>
-  </div>
-</template>
-
 <script>
+import WindowBase from 'src/windows/WindowBase'
+
 export default {
+  mixins: [WindowBase],
   props: [
     'uuid'
   ]
 }
 </script>
-
-<style scoped>
-</style>

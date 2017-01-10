@@ -34,6 +34,9 @@ export default {
   computed: {
     windowData: function () {
       return this.$store.state.windows[this.windowId]
+    },
+    dbData: function () {
+      return this.$store.state.db
     }
   }
 }

@@ -13,12 +13,11 @@
       </thead>
       <tbody>
         <tr v-for="uuid in pageData.uuidList">
-          <td>{{ dbData.vm[uuid].name }}</td>
+          <td @click="updatePage({ currItemUuid: uuid })">{{ dbData.vm[uuid].name }}</td>
         </tr>
       </tbody>
     </table>
-    <div class="sidepage">
-    </div>
+    <vm-instance-detail-side-page v-if="!!pageData.currItemUuid" :uuid="pageData.currItemUuid" @close="updatePage({ currItemUuid: '' })" />
   </div>
 </template>
 
@@ -28,8 +27,9 @@ import { mapActions } from 'vuex'
 
 import rpc from 'src/utils/rpc'
 import CreateVmInstanceDlg from 'src/windows/CreateVmInstance'
-
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
+import VmInstanceDetailSidePage from 'src/windows/VmInstanceDetailSidePage'
+Vue.component('vm-instance-detail-side-page', VmInstanceDetailSidePage)
 
 export default {
   name: 'vmInstance',
