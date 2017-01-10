@@ -1,0 +1,11 @@
+td {
+  padding: 3px 8px 3px 8px;
+}
+
+tbody tr:hover {
+  background-color: #eee;
+}
+
+.table-highlight {
+    background-color: #ebf2f9  !important;
+}

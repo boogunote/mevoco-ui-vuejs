@@ -9,11 +9,17 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>CPU</th>
+          <th>Memory</th>
+          <th>Create Date</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="uuid in windowData.uuidList">
-          <td @click="updateWindow({ currItemUuid: uuid })">{{ dbData.vm[uuid].name }}</td>
+        <tr v-for="uuid in windowData.uuidList" :class="{ 'table-highlight': uuid == windowData.currItemUuid }" @click="updateWindow({ currItemUuid: uuid })">
+          <td>{{ dbData.vm[uuid].name }}</td>
+          <td>{{ dbData.vm[uuid].cpuNum }}</td>
+          <td>{{ dbData.vm[uuid].memorySize }}</td>
+          <td>{{ dbData.vm[uuid].createDate }}</td>
         </tr>
       </tbody>
     </table>
@@ -33,6 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

@@ -2,11 +2,13 @@
   <div>
     <div class="nav">
       <ul>
-        <li><router-link to="/main/vm" :style="{color: $store.state.route.path != '/main/vm'? 'red':'yellow'}">VM</router-link></li>
-        <li><router-link to="/main/host" :style="{color: $store.state.route.path != '/main/host'? 'red':'yellow'}">host</router-link></li>
+        <router-link to="/main/vm" tag='li'><div class="item">VM</div></router-link>
+        <router-link to="/main/host" tag='li'><div class="item">Host</div></router-link>
       </ul>
     </div>
     <div class="section">
+      <div class="header">
+      </div>
       <router-view class="full"></router-view>
     </div>
   </div>
@@ -29,5 +31,27 @@ export default {
 .section {
   height: 100%;
   margin-left: 200px;
+}
+
+.header {
+  height: 60px;
+}
+
+.item {
+  display: block;
+  padding: 10px 10px 10px 25px;
+  color: #A0ABBF;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #262E3D;
+  color: #fff;
+}
+
+.router-link-active .item {
+  background-color: #262E3D;
+  color: #fff;
+  box-shadow: 4px 0 0 #15A4F4 inset;
 }
 </style>

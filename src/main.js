@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import VueI18n from 'vue-i18n'
 import store from './store'
 import { sync } from 'vuex-router-sync'
+import 'src/styles'
 
 import en from 'src/i18n/en'
 import zhCN from 'src/i18n/zh-CN'
@@ -23,6 +24,7 @@ Vue.config.lang = 'zh-CN'
 Object.keys(locales).forEach(function (lang) {
   Vue.locale(lang, locales[lang])
 })
+
 import App from './App'
 import LoginPage from './pages/Login'
 import MainPage from './pages/Main'
