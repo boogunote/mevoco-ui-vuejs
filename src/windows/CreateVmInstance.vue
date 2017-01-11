@@ -12,6 +12,7 @@
         v-if="windowData.showInstanceOfferingDlg"
         @close="(uuid) => updateWindow({ 'showInstanceOfferingDlg': false, 'instanceOfferingUuid': uuid })"
         :assigned-id="windowData.instanceOfferingWindowId"
+        :conditions="instanceOfferingConditions" 
       />
       <br />
       <span>
@@ -57,7 +58,14 @@ export default {
   mixins: [WindowBase],
   data () {
     return {
-      className: 'CreateInstance'
+      className: 'CreateInstance',
+      instanceOfferingConditions: undefined
+      // [DON'T REMOVE] Example of pass object to child component
+      // instanceOfferingConditions: [{
+      //   name: 'name',
+      //   op: '=',
+      //   value: 'test'
+      // }]
     }
   },
   created () {
@@ -83,17 +91,18 @@ export default {
       }
     },
     openInstanceOfferingDlg: function () {
-      const self = this
+      // const self = this
       this.updateWindow({ 'showInstanceOfferingDlg': true })
       .then(function () {
-        self._updateWindow({
-          id: self.windowData.instanceOfferingWindowId,
-          conditions: [{
-            name: 'name',
-            op: '=',
-            value: 'test'
-          }]
-        })
+        // [DON'T REMOVE]Example for outer change.
+        // self._updateWindow({
+        //   id: self.windowData.instanceOfferingWindowId,
+        //   conditions: [{
+        //     name: 'name',
+        //     op: '=',
+        //     value: 'test'
+        //   }]
+        // })
       })
     }
   }
