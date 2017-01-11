@@ -2,8 +2,8 @@
   <div>
     <div class="nav">
       <ul>
-        <router-link to="/main/vm" tag='li'><div class="item">VM</div></router-link>
-        <router-link to="/main/host" tag='li'><div class="item">Host</div></router-link>
+        <router-link to="/main/vm" tag='li' active-class="active"><div class="item">VM</div></router-link>
+        <router-link to="/main/host" tag='li' active-class="active"><div class="item">Host</div></router-link>
       </ul>
     </div>
     <div class="section">
@@ -49,7 +49,7 @@ export default {
   color: #fff;
 }
 
-.router-link-active .item {
+.active .item {
   background-color: #262E3D;
   color: #fff;
   box-shadow: 4px 0 0 #15A4F4 inset;

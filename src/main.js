@@ -37,6 +37,7 @@ import HostPage from './pages/Host'
 const routes = [
   {
     path: '/',
+    redirect: '/main',
     component: App,
     children: [
       {
@@ -46,6 +47,7 @@ const routes = [
       {
         path: 'main',
         component: MainPage,
+        redirect: '/main/vm',
         children: [
           {
             path: 'vm',
@@ -58,7 +60,8 @@ const routes = [
         ]
       }
     ]
-  }
+  },
+  { path: '*', redirect: '/' }
 ]
 
 const router = new VueRouter({
