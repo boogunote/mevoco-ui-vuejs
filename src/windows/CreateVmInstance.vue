@@ -7,10 +7,11 @@
       <span>
         {{ dbData.instanceOffering[windowData.instanceOfferingUuid] && dbData.instanceOffering[windowData.instanceOfferingUuid].name }}
       </span>
-      <button @click="updateWindow({ 'showInstanceOfferingDlg': true })">Instance Offering</button>
+      <button @click="openInstanceOfferingDlg">Instance Offering</button>
       <instance-offering-list-dlg
         v-if="windowData.showInstanceOfferingDlg"
         @close="(uuid) => updateWindow({ 'showInstanceOfferingDlg': false, 'instanceOfferingUuid': uuid })"
+        :assigned-id="windowData.instanceOfferingWindowId"
       />
       <br />
       <span>
@@ -65,6 +66,7 @@ export default {
       instanceOfferingUuid: '',
       imageUuid: '',
       networkUuid: '',
+      instanceOfferingWindowId: 'kashfashflashfklshfsdklfhskfhdsf',
       showInstanceOfferingDlg: false,
       showImageDlg: false,
       showNetworkDlg: false
@@ -79,6 +81,20 @@ export default {
         l3NetworkUuids: [this.windowData.networkUuid],
         defaultL3NetworkUuid: this.windowData.networkUuid
       }
+    },
+    openInstanceOfferingDlg: function () {
+      const self = this
+      this.updateWindow({ 'showInstanceOfferingDlg': true })
+      .then(function () {
+        self._updateWindow({
+          id: self.windowData.instanceOfferingWindowId,
+          conditions: [{
+            name: 'name',
+            op: '=',
+            value: 'test'
+          }]
+        })
+      })
     }
   }
 }

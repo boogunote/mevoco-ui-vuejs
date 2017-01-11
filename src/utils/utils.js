@@ -6,3 +6,26 @@ export function genUniqueId () {
   }
   return randomString(8, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 }
+
+export function isConditionsEqual (conditions, oldConditions) {
+  if (!oldConditions || oldConditions.length !== conditions.length) {
+    return false
+  }
+  let isEqual = true
+  for (let i in conditions) {
+    let found = false
+    for (let j in oldConditions) {
+      if (conditions[i].name === oldConditions[j].name &&
+          conditions[i].op === oldConditions[j].op &&
+          conditions[i].value === oldConditions[j].value) {
+        found = true
+        break
+      }
+    }
+    if (!found) {
+      isEqual = false
+      break
+    }
+  }
+  return isEqual
+}

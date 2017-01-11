@@ -12,10 +12,10 @@ const getters = {
 
 // actions
 const actions = {
-  createWindow ({ commit, state }, id) {
-    commit(types.CREATE_WINDOW, id)
+  createWindow ({ commit, state }, param) {
+    commit(types.CREATE_WINDOW, param)
   },
-  updateWindow ({ commit, state }, param, test) {
+  updateWindow ({ commit, state }, param) {
     commit(types.UPDATE_WINDOW, param)
   },
   destroyWindow ({ commit, state }, id) {
@@ -25,16 +25,17 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.CREATE_WINDOW] (state, id) {
-    Vue.set(state, id, {
-      id: id
-    })
+  [types.CREATE_WINDOW] (state, param) {
+    Vue.set(state, param.id, param)
   },
   [types.UPDATE_WINDOW] (state, newState) {
-    Vue.set(state, newState.id, {
-      ...state[newState.id],
-      ...newState
+    Object.keys(newState).forEach(function (propName) {
+      if (propName !== 'id') Vue.set(state[newState.id], propName, newState[propName])
     })
+    // Vue.set(state, newState.id, {
+    //   ...state[newState.id],
+    //   ...newState
+    // })
   },
   [types.DESTROY_WINDOW] (state, id) {
     // Vue.set(state, id, undefined)

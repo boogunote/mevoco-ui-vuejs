@@ -1,5 +1,6 @@
 <script>
 import rpc from 'src/utils/rpc'
+import { isConditionsEqual } from 'src/utils/utils'
 import WindowBase from 'src/windows/WindowBase'
 
 export default {
@@ -16,7 +17,7 @@ export default {
           start: 0,
           limit: 1000,
           replyWithCount: true,
-          conditions: []
+          conditions: this.windowData.conditions ? this.windowData.conditions : []
         }
       }, (resp) => {
         self.updateWindow({ uuidList: resp.inventories.map((item) => item.uuid) })
@@ -25,6 +26,11 @@ export default {
           list: resp.inventories
         })
       })
+    }
+  },
+  watch: {
+    'windowData.conditions': function (conditions, oldConditions) {
+      if (!isConditionsEqual(conditions, oldConditions)) this.queryList()
     }
   }
 }
