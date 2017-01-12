@@ -15,7 +15,7 @@ function getFirstItem (obj) {
 }
 
 function connect (cb) {
-  if (client && client.connected && connecting) return
+  if ((client && client.connected) || connecting) return
   connecting = true
   const sessionUuid = localStorage.getItem('sessionUuid')
   var socket = new SockJS('http://localhost:8080/stomp')
@@ -31,11 +31,10 @@ function connect (cb) {
       cbList[resp.headers.apiId](resp)
       delete cbList[resp.headers.apiId]
     })
-    if (waitingList.length > 0) {
-      waitingList.forEach((_) => {
-        _()
-      })
-      waitingList.length = 0
+    if (typeof cb === 'function') {
+      cb()
+    } else if (cb.length > 0) {
+      cb.shift()()
     }
   })
 }
@@ -55,7 +54,7 @@ function call (msg, cb) {
   if (!client || !client.connected) {
     waitingList.push(_)
     if (!connecting) {
-      connect()
+      connect(waitingList)
     }
   } else {
     _()
