@@ -4,7 +4,6 @@ import WindowBase from 'src/windows/Base/Window'
 export default {
   mixins: [WindowBase],
   created: function () {
-    this.queryList()
   },
   methods: {
     clickCheckbox: function (uuid, $event) {
