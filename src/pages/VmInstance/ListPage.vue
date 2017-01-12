@@ -8,6 +8,7 @@
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>Name</th>
           <th>CPU</th>
           <th>Memory</th>
@@ -16,6 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="uuid in windowData.uuidList" :class="{ 'table-highlight': uuid == windowData.currItemUuid }" @click="updateWindow({ currItemUuid: uuid })">
+          <td><input type="checkbox" :value="windowData.table[uuid].checked" @click.stop="clickCheckbox(uuid, $event)"></td>
           <td>{{ dbData.vm[uuid].name }}</td>
           <td>{{ dbData.vm[uuid].cpuNum }}</td>
           <td>{{ dbData.vm[uuid].memorySize }}</td>

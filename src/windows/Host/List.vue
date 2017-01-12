@@ -1,6 +1,6 @@
 <script>
 import rpc from 'src/utils/rpc'
-import WindowBase from 'src/windows/WindowBase'
+import WindowBase from 'src/windows/Base/Window'
 
 export default {
   mixins: [WindowBase],

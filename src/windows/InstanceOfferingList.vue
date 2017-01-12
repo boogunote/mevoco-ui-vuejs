@@ -1,7 +1,7 @@
 <script>
 import rpc from 'src/utils/rpc'
 import { isConditionsEqual, genUniqueId } from 'src/utils/utils'
-import WindowBase from 'src/windows/Base/Window'
+import WindowBase from 'src/windows/WindowBase'
 
 export default {
   mixins: [WindowBase],
