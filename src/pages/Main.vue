@@ -8,8 +8,9 @@
     </div>
     <div class="section">
       <div class="header">
+        welcome
       </div>
-      <router-view class="full"></router-view>
+      <router-view class="content"></router-view>
     </div>
   </div>
 </template>
@@ -31,10 +32,18 @@ export default {
 .section {
   height: 100%;
   margin-left: 200px;
+  padding-top: 60px
 }
 
 .header {
+  position: absolute;
+  top: 0;
   height: 60px;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
 }
 
 .item {

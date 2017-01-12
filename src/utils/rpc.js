@@ -23,7 +23,7 @@ function connect (cb) {
     connecting = false
   }
   client = Stomp.over(socket)
-  // client.debug = null
+  client.debug = null
 
   client.connect({}, () => {
     client.subscribe(`/topic/hello/${sessionUuid}`, (reply) => {
@@ -49,8 +49,6 @@ function call (msg, cb) {
     cbList[apiId] = cb
     client.send('/app/hello', {}, JSON.stringify(msg))
   }
-  console.log(client)
-  console.log(connecting)
   if (!client || !client.connected) {
     waitingList.push(_)
     if (!connecting) {
