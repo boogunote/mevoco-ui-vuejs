@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import VmInstanceDetail from 'src/windows/VmInstanceDetail'
+import VmInstanceDetail from './Detail'
 
 export default {
   mixins: [VmInstanceDetail],

@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import VmInstanceList from 'src/windows/VmInstanceList'
+import VmInstanceList from 'src/windows/VmInstance/List'
 
 export default {
   mixins: [VmInstanceList],
   data () {
     return {
-      className: 'VmInstanceListFull'
+      className: 'VmInstanceListPage'
     }
   }
 }

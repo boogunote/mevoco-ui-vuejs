@@ -44,11 +44,12 @@
 
 <script>
 import Vue from 'vue'
-import InstanceOfferingListDlg from 'src/windows/InstanceOfferingListDlg'
+import { genUniqueId } from 'src/utils/utils'
+import InstanceOfferingListDlg from 'src/windows/VmInstance/dialogs/InstanceOfferingList'
 Vue.component('instance-offering-list-dlg', InstanceOfferingListDlg)
-import ImageListDlg from 'src/windows/ImageListDlg'
+import ImageListDlg from 'src/windows/VmInstance/dialogs/ImageList'
 Vue.component('image-list-dlg', ImageListDlg)
-import L3NetworkListDlg from 'src/windows/L3NetworkListDlg'
+import L3NetworkListDlg from 'src/windows/VmInstance/dialogs/L3NetworkList'
 Vue.component('l3network-list-dlg', L3NetworkListDlg)
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
@@ -58,7 +59,7 @@ export default {
   mixins: [WindowBase],
   data () {
     return {
-      className: 'CreateInstance',
+      className: 'CreateInstanceDlg',
       instanceOfferingConditions: undefined
       // [DON'T REMOVE] Example of pass object to child component
       // instanceOfferingConditions: [{
@@ -74,7 +75,7 @@ export default {
       instanceOfferingUuid: '',
       imageUuid: '',
       networkUuid: '',
-      instanceOfferingWindowId: 'kashfashflashfklshfsdklfhskfhdsf',
+      instanceOfferingWindowId: `InstanceOfferingDlg-${genUniqueId()}`,
       showInstanceOfferingDlg: false,
       showImageDlg: false,
       showNetworkDlg: false

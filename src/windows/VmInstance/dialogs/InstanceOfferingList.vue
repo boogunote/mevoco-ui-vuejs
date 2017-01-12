@@ -1,6 +1,6 @@
 <template>
   <dialog-template>
-    <div slot="header">Image</div>
+    <div slot="header">Instance Offering</div>
     <div slot="body">
       <table>
         <thead>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
           <tr v-for="uuid in windowData.uuidList" @click="updateWindow({ 'selectedItem': uuid })">
-            <td>{{ dbData.image[uuid].name }}</td>
+            <td>{{ dbData.instanceOffering[uuid].name }}</td>
           </tr>
         </tbody>
       </table>
@@ -27,13 +27,13 @@
 import Vue from 'vue'
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
-import ImageList from 'src/windows/ImageList'
+import InstanceOfferingList from 'src/windows/InstanceOffering/List'
 
 export default {
-  mixins: [ImageList],
+  mixins: [InstanceOfferingList],
   data () {
     return {
-      className: 'ImageListDlg'
+      className: 'InstanceOfferingListDlg'
     }
   }
 }

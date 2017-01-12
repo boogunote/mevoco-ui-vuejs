@@ -1,6 +1,6 @@
 <template>
   <dialog-template>
-    <div slot="header">Network</div>
+    <div slot="header">Image</div>
     <div slot="body">
       <table>
         <thead>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
           <tr v-for="uuid in windowData.uuidList" @click="updateWindow({ 'selectedItem': uuid })">
-            <td>{{ dbData.l3network[uuid].name }}</td>
+            <td>{{ dbData.image[uuid].name }}</td>
           </tr>
         </tbody>
       </table>
@@ -27,13 +27,13 @@
 import Vue from 'vue'
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
-import L3NetworkList from 'src/windows/L3NetworkList'
+import ImageList from 'src/windows/Image/List'
 
 export default {
-  mixins: [L3NetworkList],
+  mixins: [ImageList],
   data () {
     return {
-      className: 'L3NetworkListDlg'
+      className: 'ImageListDlg'
     }
   }
 }

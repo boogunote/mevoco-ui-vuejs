@@ -1,6 +1,6 @@
 <template>
   <dialog-template>
-    <div slot="header">Instance Offering</div>
+    <div slot="header">Network</div>
     <div slot="body">
       <table>
         <thead>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
           <tr v-for="uuid in windowData.uuidList" @click="updateWindow({ 'selectedItem': uuid })">
-            <td>{{ dbData.instanceOffering[uuid].name }}</td>
+            <td>{{ dbData.l3network[uuid].name }}</td>
           </tr>
         </tbody>
       </table>
@@ -27,13 +27,13 @@
 import Vue from 'vue'
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
-import InstanceOfferingList from 'src/windows/InstanceOfferingList'
+import L3NetworkList from 'src/windows/L3Network/List'
 
 export default {
-  mixins: [InstanceOfferingList],
+  mixins: [L3NetworkList],
   data () {
     return {
-      className: 'InstanceOfferingListDlg'
+      className: 'L3NetworkListDlg'
     }
   }
 }

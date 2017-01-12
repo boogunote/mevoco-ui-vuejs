@@ -2,9 +2,9 @@
 import Vue from 'vue'
 
 import rpc from 'src/utils/rpc'
-import CreateVmInstanceDlg from 'src/windows/CreateVmInstanceDlg'
+import CreateVmInstanceDlg from 'src/windows/VmInstance/dialogs/CreateVmInstance'
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
-import VmInstanceDetailSidePage from 'src/windows/VmInstanceDetailSidePage'
+import VmInstanceDetailSidePage from 'src/windows/VmInstance/DetailSidePage'
 Vue.component('vm-instance-detail-side-page', VmInstanceDetailSidePage)
 import WindowBase from 'src/windows/WindowBase'
 

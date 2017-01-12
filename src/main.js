@@ -31,8 +31,8 @@ Object.keys(locales).forEach(function (lang) {
 import App from './App'
 import LoginPage from './pages/Login'
 import MainPage from './pages/Main'
-import VmInstancePage from './pages/VmInstance'
-import HostPage from './pages/Host'
+import VmInstancePage from './pages/VmInstance/Index'
+import HostPage from './pages/Host/Index'
 
 const routes = [
   {

@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import HostList from 'src/windows/HostList'
+import HostList from 'src/windows/Host/List'
 
 export default {
   mixins: [HostList],
   data () {
     return {
-      className: 'HostListFull'
+      className: 'HostListPage'
     }
   }
 }
