@@ -22,15 +22,9 @@ function connect (cb) {
 
   client.connect({}, () => {
     client.subscribe(`/topic/hello/${sessionUuid}`, (reply) => {
-      let resp = getFirstItem(JSON.parse(reply.body))
-      let apiId = ''
-      if (resp.headers.correlationId) {
-        apiId = resp.headers.correlationId.split('-')[1]
-      } else {
-        apiId = resp.apiId.split('-')[1]
-      }
-      cbList[apiId](resp)
-      delete cbList[apiId]
+      let resp = JSON.parse(reply.body)
+      cbList[resp.headers.apiId](resp)
+      delete cbList[resp.headers.apiId]
     })
     if (cb) cb()
   })
