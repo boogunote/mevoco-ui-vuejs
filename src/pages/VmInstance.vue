@@ -33,6 +33,7 @@
 import VmInstanceList from 'src/windows/VmInstance/List'
 
 export default {
+  name: 'VmInstancePage',
   mixins: [VmInstanceList],
   data () {
     return {

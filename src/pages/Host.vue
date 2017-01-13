@@ -20,6 +20,7 @@
 import HostList from 'src/windows/Host/List'
 
 export default {
+  name: 'HostListPage',
   mixins: [HostList],
   data () {
     return {
