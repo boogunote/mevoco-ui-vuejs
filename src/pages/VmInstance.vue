@@ -6,7 +6,7 @@
     <create-vm-instance-dlg
       v-if="windowData.showDlgCreateVmInstance"
       @close="(param) => { create(param); updateWindow({ showDlgCreateVmInstance: false }) }" />
-    <table>
+    <table class="page-table">
       <thead>
         <tr>
           <th><input type="checkbox" :checked="isAllSelected" @change="clickSelectAll()"></input></th>

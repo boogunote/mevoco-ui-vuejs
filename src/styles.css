@@ -9,3 +9,12 @@ tbody tr:hover {
 .table-highlight {
     background-color: #ebf2f9  !important;
 }
+
+.page-table {
+  width: 100%;
+}
+
+.page-table th {
+  text-align: left;
+  padding: 3px 8px 3px 8px;
+}

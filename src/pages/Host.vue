@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;">
     <div>Host</div>
-    <table>
+    <table class="page-table">
       <thead>
         <tr>
           <th><input type="checkbox" :checked="isAllSelected" @change="clickSelectAll()"></input></th>
