@@ -72,7 +72,9 @@ export default {
         // Add the valueline path.
         svg.append('path')
             .data([data])
-            .attr('class', 'line')
+            .style('fill', 'none')
+            .style('stroke', 'steelblue')
+            .style('stroke-width', '2px')
             .attr('d', valueline)
 
         // Add the X Axis
@@ -113,10 +115,4 @@ export default {
   min-height: 150px;
   overflow: auto;
 }
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 2px;
-}
-
 </style>
