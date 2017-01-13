@@ -9,7 +9,7 @@
     <table>
       <thead>
         <tr>
-          <th><input type="checkbox" v-model="isAllSelected" @click.stop="clickSelectAll()"></input></th>
+          <th><input type="checkbox" :checked="isAllSelected" @change="clickSelectAll()"></input></th>
           <th>Name</th>
           <th>CPU</th>
           <th>Memory</th>
@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr v-for="uuid in windowData.uuidList" :class="{ 'table-highlight': uuid == windowData.currItemUuid }" @click="updateWindow({ currItemUuid: uuid })">
-          <td><input type="checkbox" v-model="windowData.table[uuid].selected" @click.stop="clickCheckbox(uuid, $event)"></td>
+          <td><input type="checkbox" :checked="windowData.table[uuid].selected" @change="clickCheckbox(uuid, $event)"></td>
           <td>{{ dbData.vm[uuid].name }}</td>
           <td>{{ dbData.vm[uuid].cpuNum }}</td>
           <td>{{ dbData.vm[uuid].memorySize }}</td>
