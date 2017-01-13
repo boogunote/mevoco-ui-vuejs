@@ -1,11 +1,10 @@
 <template>
-  <div class='sidepage'>
-    <div class='header'>
+  <div class="sidepage">
+    <div class="header">
       {{dbData.vm[uuid].name}}
-      <button @click='$emit('close')'>x</button>
+      <button @click="$emit('close')">x</button>
     </div>
-    <div class='content'>
-      <div id='svg'></div>
+    <div class="content">
     </div>
   </div>
 </template>

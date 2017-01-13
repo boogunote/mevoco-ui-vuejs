@@ -11,11 +11,23 @@ export default {
         table: {
           ...this.windowData.table,
           [uuid]: {
-            checked: !this.windowData.table[uuid].checked
+            selected: !this.windowData.table[uuid].selected
           }
         }
       }
       this.updateWindow(newState)
+    }
+  },
+  computed: {
+    isAllSelected: function () {
+      if (!this.windowData.uuidList || this.windowData.uuidList.length === 0) return false
+      for (let i in this.windowData.uuidList) {
+        if (!this.windowData.table[this.windowData.uuidList[i]].selected) {
+          console.log(!this.windowData.table[this.windowData.uuidList[i]].selected)
+          return false
+        }
+      }
+      return true
     }
   }
 }

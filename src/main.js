@@ -5,7 +5,6 @@ import VueRouter from 'vue-router'
 import VueI18n from 'vue-i18n'
 import store from './store'
 import { sync } from 'vuex-router-sync'
-import AsyncComputed from 'vue-async-computed'
 import 'src/styles.css'
 
 import en from 'src/i18n/en'
@@ -18,7 +17,6 @@ var locales = {
 
 Vue.use(VueRouter)
 Vue.use(VueI18n)
-Vue.use(AsyncComputed)
 
 // set lang
 Vue.config.lang = 'zh-CN'

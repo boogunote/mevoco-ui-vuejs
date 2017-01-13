@@ -29,7 +29,7 @@ export default {
         let table = {}
         uuidList.forEach((uuid) => {
           table[uuid] = {
-            checked: false
+            selected: false
           }
         })
         self.updateWindow({ uuidList, table })
@@ -48,7 +48,7 @@ export default {
         uuidList.unshift(resp.inventory.uuid)
         let row = {}
         row[resp.inventory.uuid] = {}
-        row[resp.inventory.uuid].checked = false
+        row[resp.inventory.uuid].selected = false
         let table = Object.assign({}, { ...this.windowData.table }, row)
         self.updateWindow({ uuidList, table })
         self.updateDbTable({
