@@ -31,7 +31,10 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import VmInstanceList from 'src/windows/VmInstance/List'
+import VmInstanceDetailSidePage from 'src/windows/VmInstance/DetailSidePage'
+Vue.component('vm-instance-detail-side-page', VmInstanceDetailSidePage)
 
 export default {
   name: 'VmInstancePage',

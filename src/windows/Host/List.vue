@@ -1,11 +1,10 @@
 <script>
 import rpc from 'src/utils/rpc'
-import WindowBase from 'src/windows/Base/Window'
+import MultiSelectList from 'src/windows/Base/MultiSelectList'
 
 export default {
-  mixins: [WindowBase],
+  mixins: [MultiSelectList],
   created: function () {
-    this.queryList()
   },
   methods: {
     queryList: function () {
@@ -19,7 +18,14 @@ export default {
           conditions: []
         }
       }, (resp) => {
-        self.updateWindow({ uuidList: resp.inventories.map((item) => item.uuid) })
+        let uuidList = resp.inventories.map((item) => item.uuid)
+        let table = {}
+        uuidList.forEach((uuid) => {
+          table[uuid] = {
+            selected: false
+          }
+        })
+        self.updateWindow({ uuidList, table })
         self.updateDbTable({
           tableName: 'host',
           list: resp.inventories

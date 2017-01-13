@@ -4,8 +4,6 @@ import _ from 'lodash'
 import rpc from 'src/utils/rpc'
 import CreateVmInstanceDlg from 'src/windows/VmInstance/dialogs/CreateVmInstance'
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
-import VmInstanceDetailSidePage from 'src/windows/VmInstance/DetailSidePage'
-Vue.component('vm-instance-detail-side-page', VmInstanceDetailSidePage)
 import MultiSelectList from 'src/windows/Base/MultiSelectList'
 
 export default {

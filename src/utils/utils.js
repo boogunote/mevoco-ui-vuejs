@@ -33,3 +33,23 @@ export function isConditionsEqual (conditions, oldConditions) {
   }
   return isEqual
 }
+
+export function vmCpuQueryExpression (type, hostUuid, vmUuid) {
+  var expressionName = 'collectd:collectd_virt_virt_vcpu'
+  var exportedInstanceStr = '{exported_instance="' + vmUuid + '",'
+  var typeStr = 'type="' + type + '",'
+  var hostUuidStr = 'hostUuid="' + hostUuid + '"}'
+  if (type === 'total') {
+    expressionName = 'collectd:collectd_virt_virt_cpu_total'
+    typeStr = ''
+  }
+  return `${expressionName}${exportedInstanceStr}${typeStr}${hostUuidStr}`
+}
+
+export function hostCpuQueryExpression (cpu, type, hostUuid) {
+  var expressionName = 'collectd_cpu_percent'
+  var cpuStr = '{cpu="' + cpu + '",'
+  var typeStr = 'type="' + type + '",'
+  var hostUuidStr = 'hostUuid="' + hostUuid + '"}'
+  return `${expressionName}${cpuStr}${typeStr}${hostUuidStr}`
+}
