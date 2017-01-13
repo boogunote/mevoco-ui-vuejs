@@ -2,6 +2,7 @@
   <div style="height: 100%;">
     <div>VM Instance</div>
     <button @click="updateWindow({ showDlgCreateVmInstance: true })">Create</button>
+    <button @click="pageDelete">Delete</button>
     <create-vm-instance-dlg
       v-if="windowData.showDlgCreateVmInstance"
       @close="(param) => { create(param); updateWindow({ showDlgCreateVmInstance: false }) }" />
@@ -35,9 +36,26 @@ import VmInstanceList from 'src/windows/VmInstance/List'
 export default {
   name: 'VmInstancePage',
   mixins: [VmInstanceList],
+  created: function () {
+    this.updateWindow({ conditions: [{
+      name: 'state',
+      op: '!=',
+      value: 'Destroyed'
+    }] })
+    this.queryList()
+  },
   data () {
     return {
       className: 'VmInstanceListPage'
+    }
+  },
+  methods: {
+    pageDelete: function () {
+      let uuidList = []
+      this.windowData.uuidList.forEach((uuid) => {
+        if (this.windowData.table[uuid].selected) uuidList.push(uuid)
+      })
+      if (uuidList.length > 0) this.delete(uuidList)
     }
   }
 }

@@ -1,6 +1,6 @@
 <script>
 import Vue from 'vue'
-
+import _ from 'lodash'
 import rpc from 'src/utils/rpc'
 import CreateVmInstanceDlg from 'src/windows/VmInstance/dialogs/CreateVmInstance'
 Vue.component('create-vm-instance-dlg', CreateVmInstanceDlg)
@@ -11,7 +11,6 @@ import MultiSelectList from 'src/windows/Base/MultiSelectList'
 export default {
   mixins: [MultiSelectList],
   created: function () {
-    this.queryList()
   },
   methods: {
     queryList: function () {
@@ -22,7 +21,7 @@ export default {
           start: 0,
           limit: 1000,
           replyWithCount: true,
-          conditions: []
+          conditions: this.windowData.conditions
         }
       }, (resp) => {
         let uuidList = resp.inventories.map((item) => item.uuid)
@@ -55,6 +54,28 @@ export default {
           tableName: 'vm',
           list: [resp.inventory]
         })
+      })
+    },
+    delete: function (uuidList) {
+      const self = this
+      uuidList.forEach(function (uuid) {
+        ((uuid) => {
+          rpc.call({
+            'org.zstack.header.vm.APIDestroyVmInstanceMsg': { uuid }
+          }, (resp) => {
+            let newUuidList = self.windowData.uuidList.filter((_uuid) => uuid !== _uuid)
+            let newTable = _.cloneDeep(self.windowData.table)
+            delete newTable[uuid]
+            self.updateWindow({
+              uuidList: newUuidList,
+              table: newTable
+            })
+            // self.updateDbTable({
+            //   tableName: 'vm',
+            //   list: [resp.inventory]
+            // })
+          })
+        })(uuid)
       })
     }
   }
