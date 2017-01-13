@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueI18n from 'vue-i18n'
+import 'es6-promise/auto'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 import 'src/styles.css'

@@ -18,7 +18,6 @@ import sha512 from 'crypto-js/sha512'
 // const router = new VueRouter()
 
 /* global fetch:false */
-/* global TextDecoder:false */
 /* global localStorage:false */
 
 import rpc from 'src/utils/rpc'
@@ -36,10 +35,7 @@ export default {
       const self = this
       fetch(`http://localhost:8080/apiCall/login?accountName=${this.accountName}&password=${sha512(this.password).toString()}`)
       .then(function (response) {
-        const reader = response.body.getReader()
-        reader.read().then(({value, done}) => {
-          const output = new TextDecoder('utf-8').decode(value)
-          const reply = JSON.parse(output)
+        response.json().then((reply) => {
           if (reply) {
             localStorage.setItem('sessionUuid', reply.inventory.uuid)
             rpc.connect(() => {
