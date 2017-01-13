@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="uuid in windowData.uuidList" :class="{ 'table-highlight': uuid == windowData.currItemUuid }" @click="updateWindow({ currItemUuid: uuid })">
+        <tr v-for="uuid in windowData.uuidList" :class="{ 'table-highlight': windowData.table[uuid].selected }" @click="updateWindow({ currItemUuid: uuid })">
           <td><input type="checkbox" :checked="windowData.table[uuid].selected" @change="clickCheckbox(uuid, $event)" @click.stop></td>
           <td>{{ dbData.host[uuid].name }}</td>
           <td>{{ dbData.host[uuid].managementIp }}</td>
