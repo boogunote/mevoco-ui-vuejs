@@ -8,7 +8,7 @@
     <table>
       <thead>
         <tr>
-          <th><input type="checkbox" v-model="isAllSelected"></input></th>
+          <th><input type="checkbox" v-model="isAllSelected" @click.stop="clickSelectAll()"></input></th>
           <th>Name</th>
           <th>CPU</th>
           <th>Memory</th>
