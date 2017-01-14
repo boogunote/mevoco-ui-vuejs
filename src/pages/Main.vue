@@ -8,7 +8,9 @@
     </div>
     <div class="section">
       <div class="header">
-        welcome
+        <div class="toolbar">
+          <router-link to="/login">Login</router-link>
+        </div>
       </div>
       <router-view class="content"></router-view>
     </div>
@@ -39,6 +41,10 @@ export default {
   position: absolute;
   top: 0;
   height: 60px;
+}
+
+.toolbar {
+  float: right;
 }
 
 .content {
