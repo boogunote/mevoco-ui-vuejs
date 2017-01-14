@@ -23,7 +23,7 @@ function connect (cb) {
     connecting = false
   }
   client = Stomp.over(socket)
-  // client.debug = null
+  client.debug = null
 
   client.connect({}, () => {
     client.subscribe(`/topic/hello/${sessionUuid}`, (reply) => {

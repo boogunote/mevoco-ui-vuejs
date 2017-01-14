@@ -7,35 +7,37 @@
       <span>
         {{ dbData.instanceOffering[windowData.instanceOfferingUuid] && dbData.instanceOffering[windowData.instanceOfferingUuid].name }}
       </span>
-      <button @click="openInstanceOfferingDlg">Instance Offering</button>
-      <instance-offering-list-dlg
+      <button @click="openDialog('InstanceOfferingListDlg', { conditions: instanceOfferingConditions, cb: selectInstanceOffering })">Instance Offering</button>
+      <!-- <instance-offering-list-dlg
         v-if="windowData.showInstanceOfferingDlg"
         @close="(uuid) => updateWindow({ 'showInstanceOfferingDlg': false, 'instanceOfferingUuid': uuid })"
         :assigned-id="windowData.instanceOfferingWindowId"
         :conditions="instanceOfferingConditions" 
-      />
+      /> -->
       <br />
       <span>
         {{ dbData.image[windowData.imageUuid] && dbData.image[windowData.imageUuid].name }}
       </span>
-      <button @click="updateWindow({ 'showImageDlg': true })">Image</button>
-      <image-list-dlg
+      <button @click="openDialog('ImageListDlg', { conditions: [], cb: selectImage })">Image</button>
+      <!-- <button @click="updateWindow({ 'showImageDlg': true })">Image</button> -->
+      <!-- <image-list-dlg
         v-if="windowData.showImageDlg"
         @close="(uuid) => updateWindow({ 'showImageDlg': false, 'imageUuid': uuid })"
-      />
+      /> -->
       <br />
       <span>
         {{ dbData.l3network[windowData.networkUuid] && dbData.l3network[windowData.networkUuid].name }}
       </span>
-      <button @click="updateWindow({ 'showNetowrkDlg': true })">Network</button>
+      <button @click="openDialog('L3NetworkListDlg', { conditions: [], cb: selectNetwork })">Network</button>
+<!--       <button @click="updateWindow({ 'showNetowrkDlg': true })">Network</button>
       <l3network-list-dlg
         v-if="windowData.showNetowrkDlg"
         @close="(uuid) => updateWindow({ 'showNetowrkDlg': false, 'networkUuid': uuid })"
-      />
+      /> -->
       <br />
     </div>
     <div slot="footer">
-      <button class="modal-default-button" @click="$emit('close', createParam())">
+      <button class="modal-default-button" @click="ok">
         OK
       </button>
     </div>
@@ -54,14 +56,15 @@ Vue.component('l3network-list-dlg', L3NetworkListDlg)
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
 import WindowBase from 'src/windows/Base/Window'
+import DialogBase from 'src/windows/Base/Dialog'
 
 export default {
-  mixins: [WindowBase],
+  mixins: [WindowBase, DialogBase],
   data () {
     return {
-      className: 'CreateInstanceDlg',
-      instanceOfferingConditions: undefined
-      // [DON'T REMOVE] Example of pass object to child component
+      className: 'CreateVmInstanceDlg',
+      instanceOfferingConditions: []
+      // [DON'T REMOVE] Example of passing object to child component
       // instanceOfferingConditions: [{
       //   name: 'name',
       //   op: '=',
@@ -105,6 +108,19 @@ export default {
         //   }]
         // })
       })
+    },
+    selectInstanceOffering: function (uuid) {
+      this.updateWindow({ instanceOfferingUuid: uuid })
+    },
+    selectImage: function (uuid) {
+      this.updateWindow({ imageUuid: uuid })
+    },
+    selectNetwork: function (uuid) {
+      this.updateWindow({ networkUuid: uuid })
+    },
+    ok: function () {
+      this.dialogData.param.cb(this.createParam())
+      this.closeDialog(this.windowId)
     }
   }
 }

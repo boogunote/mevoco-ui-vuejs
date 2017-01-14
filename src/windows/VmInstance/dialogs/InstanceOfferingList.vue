@@ -16,7 +16,7 @@
       </table>
     </div>
     <div slot="footer">
-      <button class="modal-default-button" @click="$emit('close', windowData.selectedItem)">
+      <button class="modal-default-button" @click="ok">
         OK
       </button>
     </div>
@@ -28,12 +28,19 @@ import Vue from 'vue'
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
 import InstanceOfferingList from 'src/windows/InstanceOffering/List'
+import DialogBase from 'src/windows/Base/Dialog'
 
 export default {
-  mixins: [InstanceOfferingList],
+  mixins: [InstanceOfferingList, DialogBase],
   data () {
     return {
       className: 'InstanceOfferingListDlg'
+    }
+  },
+  methods: {
+    ok: function () {
+      this.dialogData.param.cb(this.windowData.selectedItem)
+      this.closeDialog(this.windowId)
     }
   }
 }

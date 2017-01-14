@@ -1,11 +1,12 @@
 <template>
   <div style="height: 100%;">
     <div>VM Instance</div>
-    <button @click="updateWindow({ showDlgCreateVmInstance: true })">Create</button>
+    <!-- <button @click="updateWindow({ showDlgCreateVmInstance: true })">Create</button> -->
+    <button @click="openDialog('CreateVmInstanceDlg', { cb: create })">Create</button>
     <button @click="pageDelete">Delete</button>
-    <create-vm-instance-dlg
+<!--     <create-vm-instance-dlg
       v-if="windowData.showDlgCreateVmInstance"
-      @close="(param) => { create(param); updateWindow({ showDlgCreateVmInstance: false }) }" />
+      @close="(param) => { create(param); updateWindow({ showDlgCreateVmInstance: false }) }" /> -->
     <table class="page-table">
       <thead>
         <tr>
@@ -35,10 +36,11 @@ import Vue from 'vue'
 import VmInstanceList from 'src/windows/VmInstance/List'
 import VmInstanceDetailSidePage from 'src/windows/VmInstance/DetailSidePage'
 Vue.component('vm-instance-detail-side-page', VmInstanceDetailSidePage)
+import DialogManager from 'src/windows/Dialog/Manager'
 
 export default {
   name: 'VmInstancePage',
-  mixins: [VmInstanceList],
+  mixins: [VmInstanceList, DialogManager],
   created: function () {
     this.updateWindow({ conditions: [{
       name: 'state',

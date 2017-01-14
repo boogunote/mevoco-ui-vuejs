@@ -16,7 +16,7 @@
       </table>
     </div>
     <div slot="footer">
-      <button class="modal-default-button" @click="$emit('close', windowData.selectedItem)">
+      <button class="modal-default-button" @click="ok">
         OK
       </button>
     </div>
@@ -28,12 +28,19 @@ import Vue from 'vue'
 import DialogTemplate from 'src/windows/DialogTemplate'
 Vue.component('dialog-template', DialogTemplate)
 import ImageList from 'src/windows/Image/List'
+import DialogBase from 'src/windows/Base/Dialog'
 
 export default {
-  mixins: [ImageList],
+  mixins: [ImageList, DialogBase],
   data () {
     return {
       className: 'ImageListDlg'
+    }
+  },
+  methods: {
+    ok: function () {
+      this.dialogData.param.cb(this.windowData.selectedItem)
+      this.closeDialog(this.windowId)
     }
   }
 }

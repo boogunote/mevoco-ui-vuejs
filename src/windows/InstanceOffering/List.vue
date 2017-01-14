@@ -13,18 +13,6 @@ export default {
     this.queryList()
   },
   methods: {
-    createWindow: function () {
-      if (this.assignedId) {
-        this.windowId = this.assignedId
-      } else {
-        this.windowId = `${this.className}-${genUniqueId()}`
-      }
-      return this._createWindow({
-        id: this.windowId,
-        className: this.className,
-        conditions: this.conditions
-      })
-    },
     queryList: function () {
       const self = this
       rpc.call({

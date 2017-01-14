@@ -26,17 +26,41 @@ export default {
     updateWindow: function (newState) {
       return this._updateWindow({ id: this.windowId, ...newState })
     },
+    openDialog: function (className, param) {
+      let windowId = `${className}-${genUniqueId()}`
+      this._openDialog({
+        id: windowId,
+        parentWindowId: this.windowId,
+        param
+      })
+
+      this._createWindow({
+        id: windowId,
+        className: className
+      })
+
+
+      return windowId
+    },
+    updateWindow: function (newState) {
+      return this._updateWindow({ id: this.windowId, ...newState })
+    },
     ...mapActions({
       _createWindow: 'createWindow',
-      _updateWindow: 'updateWindow'
+      _updateWindow: 'updateWindow',
+      _openDialog: 'openDialog',
+      _updateDialog: 'updateDialog'
     }),
     ...mapActions([
       'destroyWindow',
+      'closeDialog',
       'updateDbTable'
     ])
   },
   computed: {
     windowData: function () {
+      // [NOTICE]'for "watch 'windowData.conditions'"'
+      if (this.assignedId) this.windowId = this.assignedId
       return this.$store.state.windows[this.windowId]
     },
     dbData: function () {
