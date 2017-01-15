@@ -6,7 +6,6 @@ import WindowBase from 'src/windows/Base/Window'
 export default {
   mixins: [WindowBase],
   props: {
-    'assigned-id': String,
     conditions: Array
   },
   created: function () {

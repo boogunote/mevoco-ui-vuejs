@@ -3,7 +3,18 @@ import { mapActions } from 'vuex'
 import { genUniqueId } from 'src/utils/utils'
 
 export default {
-  props: ['assigned-id'],
+  props: {
+    'assigned-id': String
+  },
+  data: function () {
+    return {
+      // [NOTICE](xgao): windowId should be declared and assigned here.
+      // Because <component> render the template of injected
+      // Component directly before created() of this Component.
+      // That will cause exception when access windowData.
+      windowId: ''
+    }
+  },
   created: function () {
     this.createWindow()
   },
@@ -55,8 +66,6 @@ export default {
   },
   computed: {
     windowData: function () {
-      // [NOTICE]'for "watch 'windowData.conditions'"'
-      if (this.assignedId) this.windowId = this.assignedId
       return this.$store.state.windows[this.windowId]
     },
     dbData: function () {
