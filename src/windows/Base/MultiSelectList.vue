@@ -1,9 +1,7 @@
 <script>
 import _ from 'lodash'
-import WindowBase from 'src/windows/Base/Window'
 
 export default {
-  mixins: [WindowBase],
   created: function () {
   },
   methods: {
@@ -35,7 +33,6 @@ export default {
           return false
         }
       }
-      console.log('return true')
       return true
     }
   }

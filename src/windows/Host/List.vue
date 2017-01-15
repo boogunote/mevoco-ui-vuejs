@@ -1,9 +1,10 @@
 <script>
 import rpc from 'src/utils/rpc'
 import MultiSelectList from 'src/windows/Base/MultiSelectList'
+import WindowBase from 'src/windows/Base/Window'
 
 export default {
-  mixins: [MultiSelectList],
+  mixins: [MultiSelectList, WindowBase],
   created: function () {
   },
   methods: {
