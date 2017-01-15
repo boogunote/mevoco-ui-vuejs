@@ -7,7 +7,7 @@
       <span>
         {{ dbData.instanceOffering[windowData.instanceOfferingUuid] && dbData.instanceOffering[windowData.instanceOfferingUuid].name }}
       </span>
-      <button @click="openDialog('InstanceOfferingListDlg', { conditions: instanceOfferingConditions, cb: selectInstanceOffering })">Instance Offering</button>
+      <button @click="openDialog('InstanceOfferingListDlg', { conditions: instanceOfferingConditions, ok: selectInstanceOffering })">Instance Offering</button>
       <!-- <instance-offering-list-dlg
         v-if="windowData.showInstanceOfferingDlg"
         @close="(uuid) => updateWindow({ 'showInstanceOfferingDlg': false, 'instanceOfferingUuid': uuid })"
@@ -18,7 +18,7 @@
       <span>
         {{ dbData.image[windowData.imageUuid] && dbData.image[windowData.imageUuid].name }}
       </span>
-      <button @click="openDialog('ImageListDlg', { conditions: [], cb: selectImage })">Image</button>
+      <button @click="openDialog('ImageListDlg', { conditions: [], ok: selectImage })">Image</button>
       <!-- <button @click="updateWindow({ 'showImageDlg': true })">Image</button> -->
       <!-- <image-list-dlg
         v-if="windowData.showImageDlg"
@@ -28,7 +28,7 @@
       <span>
         {{ dbData.l3network[windowData.networkUuid] && dbData.l3network[windowData.networkUuid].name }}
       </span>
-      <button @click="openDialog('L3NetworkListDlg', { conditions: [], cb: selectNetwork })">Network</button>
+      <button @click="openDialog('L3NetworkListDlg', { conditions: [], ok: selectNetwork })">Network</button>
 <!--       <button @click="updateWindow({ 'showNetowrkDlg': true })">Network</button>
       <l3network-list-dlg
         v-if="windowData.showNetowrkDlg"
@@ -37,9 +37,8 @@
       <br />
     </div>
     <div slot="footer">
-      <button class="modal-default-button" @click="ok">
-        OK
-      </button>
+      <button class="modal-default-button" @click="ok">OK</button>
+      <button class="modal-default-button" @click="cancel">Cancel</button>
     </div>
   </dialog-template>
 </template>
@@ -119,7 +118,7 @@ export default {
       this.updateWindow({ networkUuid: uuid })
     },
     ok: function () {
-      this.dialogData.param.cb(this.createParam())
+      this.dialogData.param.ok(this.createParam())
       this.closeDialog(this.windowId)
     }
   }

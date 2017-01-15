@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     ok: function () {
-      this.dialogData.param.cb(this.windowData.selectedItem)
+      this.dialogData.param.ok(this.windowData.selectedItem)
       this.closeDialog(this.windowId)
     }
   }

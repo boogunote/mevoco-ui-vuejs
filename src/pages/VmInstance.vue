@@ -2,7 +2,7 @@
   <div style="height: 100%;">
     <div>VM Instance</div>
     <!-- <button @click="updateWindow({ showDlgCreateVmInstance: true })">Create</button> -->
-    <button @click="openDialog('CreateVmInstanceDlg', { cb: create })">Create</button>
+    <button @click="openDialog('CreateVmInstanceDlg', { ok: create })">Create</button>
     <button @click="pageDelete">Delete</button>
 <!--     <create-vm-instance-dlg
       v-if="windowData.showDlgCreateVmInstance"
