@@ -1,6 +1,6 @@
 <script>
 import rpc from 'src/utils/rpc'
-import { isConditionsEqual, genUniqueId } from 'src/utils/utils'
+import { isConditionsEqual } from 'src/utils/utils'
 import WindowBase from 'src/windows/Base/Window'
 
 export default {

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-/*eslint no-unused-vars: ["error", { "varsIgnorePattern": ".*" }]*/
+/* eslint no-unused-vars: ["error", { "varsIgnorePattern": ".*" }] */
 // import Vue from 'vue'
 import { mapActions } from 'vuex'
 import { genUniqueId } from 'src/utils/utils'
@@ -23,7 +23,6 @@ dialogClass.L3NetworkListDlg = L3NetworkListDlg
 export default {
   name: 'DialogManager',
   created: function () {
-    this.$on('close', function() {console.log('sdfasdfsdfsdafdsfsdf')})
   },
   data: function () {
     return {

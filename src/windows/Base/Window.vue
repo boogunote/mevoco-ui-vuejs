@@ -39,11 +39,7 @@ export default {
         className: className
       })
 
-
       return windowId
-    },
-    updateWindow: function (newState) {
-      return this._updateWindow({ id: this.windowId, ...newState })
     },
     ...mapActions({
       _createWindow: 'createWindow',
