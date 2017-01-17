@@ -39,7 +39,7 @@ function connect (cb) {
   })
 }
 
-function call (msg, cb) {
+function _call (msg, cb) {
   let _ = function () {
     const apiId = genUniqueId()
     getFirstItem(msg).session = {
@@ -59,12 +59,12 @@ function call (msg, cb) {
   }
 }
 
-function simpleCall (apiName, msgBody) {
+function call (apiName, msgBody) {
   return new Promise(function (resolve, reject) {
     var msg = {}
     msg[apiName] = msgBody
 
-    call(msg, function (data) {
+    _call(msg, function (data) {
       if (data.success) {
         resolve(data)
       } else {
@@ -76,6 +76,5 @@ function simpleCall (apiName, msgBody) {
 
 export default {
   connect,
-  call,
-  simpleCall
+  call
 }

@@ -9,7 +9,7 @@ export default {
   },
   methods: {
     queryList: async function () {
-      let resp = await rpc.simpleCall('org.zstack.header.network.l3.APIQueryL3NetworkMsg', {
+      let resp = await rpc.call('org.zstack.header.network.l3.APIQueryL3NetworkMsg', {
         count: false,
         start: 0,
         limit: 1000,

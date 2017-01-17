@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     queryList: async function () {
-      let resp = await rpc.simpleCall('org.zstack.header.configuration.APIQueryInstanceOfferingMsg', {
+      let resp = await rpc.call('org.zstack.header.configuration.APIQueryInstanceOfferingMsg', {
         count: false,
         start: 0,
         limit: 1000,

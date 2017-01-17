@@ -14,7 +14,7 @@ export default {
   methods: {
     queryList: async function () {
       // const self = this
-      let resp = await rpc.simpleCall('org.zstack.header.vm.APIQueryVmInstanceMsg', {
+      let resp = await rpc.call('org.zstack.header.vm.APIQueryVmInstanceMsg', {
         count: false,
         start: 0,
         limit: 1000,
@@ -36,7 +36,7 @@ export default {
       })
     },
     create: async function (param) {
-      let resp = await rpc.simpleCall('org.zstack.header.vm.APICreateVmInstanceMsg', param)
+      let resp = await rpc.call('org.zstack.header.vm.APICreateVmInstanceMsg', param)
       let uuidList = this.windowData.uuidList.slice()
       uuidList.unshift(resp.inventory.uuid)
       let row = {}

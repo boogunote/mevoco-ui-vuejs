@@ -9,7 +9,7 @@ export default {
   },
   methods: {
     queryList: async function () {
-      let resp = await rpc.simpleCall('org.zstack.header.image.APIQueryImageMsg', {
+      let resp = await rpc.call('org.zstack.header.image.APIQueryImageMsg', {
         count: false,
         start: 0,
         limit: 1000,
