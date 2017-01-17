@@ -12,22 +12,18 @@ export default {
     this.queryList()
   },
   methods: {
-    queryList: function () {
-      const self = this
-      rpc.call({
-        'org.zstack.header.configuration.APIQueryInstanceOfferingMsg': {
-          count: false,
-          start: 0,
-          limit: 1000,
-          replyWithCount: true,
-          conditions: this.windowData.conditions ? this.windowData.conditions : []
-        }
-      }, (resp) => {
-        self.updateWindow({ uuidList: resp.inventories.map((item) => item.uuid) })
-        self.updateDbTable({
-          tableName: 'instanceOffering',
-          list: resp.inventories
-        })
+    queryList: async function () {
+      let resp = await rpc.simpleCall('org.zstack.header.configuration.APIQueryInstanceOfferingMsg', {
+        count: false,
+        start: 0,
+        limit: 1000,
+        replyWithCount: true,
+        conditions: this.windowData.conditions ? this.windowData.conditions : []
+      })
+      this.updateWindow({ uuidList: resp.inventories.map((item) => item.uuid) })
+      this.updateDbTable({
+        tableName: 'instanceOffering',
+        list: resp.inventories
       })
     }
   },

@@ -12,47 +12,41 @@ export default {
   created: function () {
   },
   methods: {
-    queryList: function () {
-      const self = this
-      rpc.call({
-        'org.zstack.header.vm.APIQueryVmInstanceMsg': {
-          count: false,
-          start: 0,
-          limit: 1000,
-          replyWithCount: true,
-          conditions: this.windowData.conditions
+    queryList: async function () {
+      // const self = this
+      let resp = await rpc.simpleCall('org.zstack.header.vm.APIQueryVmInstanceMsg', {
+        count: false,
+        start: 0,
+        limit: 1000,
+        replyWithCount: true,
+        conditions: this.windowData.conditions
+      })
+
+      let uuidList = resp.inventories.map((item) => item.uuid)
+      let table = {}
+      uuidList.forEach((uuid) => {
+        table[uuid] = {
+          selected: false
         }
-      }, (resp) => {
-        let uuidList = resp.inventories.map((item) => item.uuid)
-        let table = {}
-        uuidList.forEach((uuid) => {
-          table[uuid] = {
-            selected: false
-          }
-        })
-        self.updateWindow({ uuidList, table })
-        self.updateDbTable({
-          tableName: 'vm',
-          list: resp.inventories
-        })
+      })
+      this.updateWindow({ uuidList, table })
+      this.updateDbTable({
+        tableName: 'vm',
+        list: resp.inventories
       })
     },
-    create: function (param) {
-      const self = this
-      rpc.call({
-        'org.zstack.header.vm.APICreateVmInstanceMsg': param
-      }, (resp) => {
-        let uuidList = this.windowData.uuidList.slice()
-        uuidList.unshift(resp.inventory.uuid)
-        let row = {}
-        row[resp.inventory.uuid] = {}
-        row[resp.inventory.uuid].selected = false
-        let table = Object.assign({}, { ...this.windowData.table }, row)
-        self.updateWindow({ uuidList, table })
-        self.updateDbTable({
-          tableName: 'vm',
-          list: [resp.inventory]
-        })
+    create: async function (param) {
+      let resp = await rpc.simpleCall('org.zstack.header.vm.APICreateVmInstanceMsg', param)
+      let uuidList = this.windowData.uuidList.slice()
+      uuidList.unshift(resp.inventory.uuid)
+      let row = {}
+      row[resp.inventory.uuid] = {}
+      row[resp.inventory.uuid].selected = false
+      let table = Object.assign({}, { ...this.windowData.table }, row)
+      this.updateWindow({ uuidList, table })
+      this.updateDbTable({
+        tableName: 'vm',
+        list: [resp.inventory]
       })
     },
     delete: function (uuidList) {

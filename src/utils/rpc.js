@@ -23,7 +23,7 @@ function connect (cb) {
     connecting = false
   }
   client = Stomp.over(socket)
-  client.debug = null
+  // client.debug = null
 
   client.connect({}, () => {
     client.subscribe(`/topic/hello/${sessionUuid}`, (reply) => {
@@ -59,7 +59,23 @@ function call (msg, cb) {
   }
 }
 
+function simpleCall (apiName, msgBody) {
+  return new Promise(function (resolve, reject) {
+    var msg = {}
+    msg[apiName] = msgBody
+
+    call(msg, function (data) {
+      if (data.success) {
+        resolve(data)
+      } else {
+        reject(data)
+      }
+    })
+  })
+}
+
 export default {
   connect,
-  call
+  call,
+  simpleCall
 }

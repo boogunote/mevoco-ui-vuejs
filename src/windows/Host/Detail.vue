@@ -22,18 +22,14 @@ export default {
     this.clearTimer()
   },
   methods: {
-    queryCpuData: function () {
-      let self = this
-      rpc.call({
-        'org.zstack.prometheus.APIPrometheusQueryPassThroughMsg': {
-          expression: hostCpuQueryExpression('0', 'user', this.uuid),
-          relativeTime: '15m',
-          step: 9
-        }
-      }, (resp) => {
-        self.updateWindow({ cpuData: resp.inventories.data.result[0].values })
-        self.drawChart()
+    queryCpuData: async function () {
+      let resp = await rpc.simpleCall('org.zstack.prometheus.APIPrometheusQueryPassThroughMsg', {
+        expression: hostCpuQueryExpression('0', 'user', this.uuid),
+        relativeTime: '15m',
+        step: 9
       })
+      this.updateWindow({ cpuData: resp.inventories.data.result[0].values })
+      this.drawChart()
     },
     clearTimer: function () {
       clearInterval(this.queryCpuDataTimerId)

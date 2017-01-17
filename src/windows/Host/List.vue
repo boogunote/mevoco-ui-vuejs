@@ -8,29 +8,25 @@ export default {
   created: function () {
   },
   methods: {
-    queryList: function () {
-      const self = this
-      rpc.call({
-        'org.zstack.header.host.APIQueryHostMsg': {
-          count: false,
-          start: 0,
-          limit: 1000,
-          replyWithCount: true,
-          conditions: []
+    queryList: async function () {
+      let resp = await rpc.simpleCall('org.zstack.header.host.APIQueryHostMsg', {
+        count: false,
+        start: 0,
+        limit: 1000,
+        replyWithCount: true,
+        conditions: []
+      })
+      let uuidList = resp.inventories.map((item) => item.uuid)
+      let table = {}
+      uuidList.forEach((uuid) => {
+        table[uuid] = {
+          selected: false
         }
-      }, (resp) => {
-        let uuidList = resp.inventories.map((item) => item.uuid)
-        let table = {}
-        uuidList.forEach((uuid) => {
-          table[uuid] = {
-            selected: false
-          }
-        })
-        self.updateWindow({ uuidList, table })
-        self.updateDbTable({
-          tableName: 'host',
-          list: resp.inventories
-        })
+      })
+      this.updateWindow({ uuidList, table })
+      this.updateDbTable({
+        tableName: 'host',
+        list: resp.inventories
       })
     }
   }
