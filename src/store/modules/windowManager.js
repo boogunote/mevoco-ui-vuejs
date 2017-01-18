@@ -4,7 +4,6 @@ import * as types from '../mutation-types'
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-  windowIdList: [],
   windows: {}
 }
 
@@ -14,35 +13,33 @@ const getters = {
 
 // actions
 const actions = {
-  openDialog ({ commit, state }, param) {
-    commit(types.OPEN_DIALOG, param)
+  createWindow ({ commit, state }, param) {
+    commit(types.CREATE_WINDOW, param)
   },
-  updateDialog ({ commit, state }, param) {
-    commit(types.UPDATE_DIALOG, param)
+  updateWindow ({ commit, state }, param) {
+    commit(types.UPDATE_WINDOW, param)
   },
-  closeDialog ({ commit, state }, id) {
-    commit(types.CLOSE_DIALOG, id)
+  destroyWindow ({ commit, state }, id) {
+    commit(types.DESTROY_WINDOW, id)
   }
 }
 
 // mutations
 const mutations = {
-  [types.OPEN_DIALOG] (state, param) {
+  [types.CREATE_WINDOW] (state, param) {
     Vue.set(state.windows, param.id, param)
-    state.windowIdList.push(param.id)
   },
-  [types.UPDATE_DIALOG] (state, newState) {
+  [types.UPDATE_WINDOW] (state, newState) {
     Object.keys(newState).forEach(function (propName) {
-      if (propName !== 'id') Vue.set(state.widnows[newState.id], propName, newState[propName])
+      if (propName !== 'id') Vue.set(state.windows[newState.id], propName, newState[propName])
     })
     // Vue.set(state, newState.id, {
     //   ...state[newState.id],
     //   ...newState
     // })
   },
-  [types.CLOSE_DIALOG] (state, id) {
+  [types.DESTROY_WINDOW] (state, id) {
     // Vue.set(state, id, undefined)
-    state.windowIdList = state.windowIdList.filter((uuid) => uuid !== id)
     delete state.windows[id]
   }
 }

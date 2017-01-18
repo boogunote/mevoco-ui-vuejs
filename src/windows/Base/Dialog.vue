@@ -1,5 +1,6 @@
 <script>
 export default {
+  props: [ 'param' ],
   methods: {
     cancel: function () {
       this.closeDialog(this.windowId)
@@ -7,7 +8,7 @@ export default {
   },
   computed: {
     dialogData: function () {
-      return this.$store.state.dialogs.windows[this.windowId]
+      return this.$store.state.dialogManager.windows[this.windowId]
     }
   }
 }

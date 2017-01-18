@@ -1,6 +1,6 @@
 <template>
   <div>
-    <component v-for="dlg in dialogList" :is="dlg.class" :assigned-id="dlg.windowId" :param="dlg.param">
+    <component v-for="dlg in dialogList" :is="dlg.class" :assigned-id="dlg.windowId">
     </component>
   </div>
 </template>
@@ -33,11 +33,10 @@ export default {
     dialogList: function () {
       const self = this
       let list = []
-      this.$store.state.dialogs.windowIdList.forEach((windowId) => {
+      this.$store.state.dialogManager.windowIdList.forEach((windowId) => {
         list.push({
           windowId,
-          class: dialogClass[self.$store.state.windows[windowId].className],
-          param: self.$store.state.windows[windowId].param
+          class: dialogClass[self.$store.state.windowManager.windows[windowId].className]
         })
       })
       return list

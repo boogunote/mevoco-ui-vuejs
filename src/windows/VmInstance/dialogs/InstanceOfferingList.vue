@@ -37,6 +37,13 @@ export default {
       className: 'InstanceOfferingListDlg'
     }
   },
+  created: function () {
+    // watch on 'windowData.conditions'.
+    // This setting will trigger queryList() immediately
+    this.updateWindow({
+      conditions: this.dialogData.param.conditions
+    })
+  },
   methods: {
     ok: function () {
       this.dialogData.param.ok(this.windowData.selectedItem)

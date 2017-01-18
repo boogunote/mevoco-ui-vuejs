@@ -62,13 +62,11 @@ export default {
   data () {
     return {
       className: 'CreateVmInstanceDlg',
-      instanceOfferingConditions: []
-      // [DON'T REMOVE] Example of passing object to child component
-      // instanceOfferingConditions: [{
-      //   name: 'name',
-      //   op: '=',
-      //   value: 'test'
-      // }]
+      instanceOfferingConditions: [{
+        name: 'state',
+        op: '=',
+        value: 'Enabled'
+      }]
     }
   },
   created () {

@@ -9,7 +9,6 @@ export default {
     conditions: Array
   },
   created: function () {
-    this.queryList()
   },
   methods: {
     queryList: async function () {

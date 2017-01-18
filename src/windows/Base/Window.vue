@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     windowData: function () {
-      return this.$store.state.windows[this.windowId]
+      return this.$store.state.windowManager.windows[this.windowId]
     },
     dbData: function () {
       return this.$store.state.db
